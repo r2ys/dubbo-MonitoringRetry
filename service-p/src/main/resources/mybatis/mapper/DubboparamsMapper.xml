@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ouyeel.provider.servicep.common.mapper.DubboparamsMapper">
+	<resultMap type="com.ouyeel.provider.servicep.common.domain.Dubboparams" id="Dubboparams">
+		<result property="id" column="id" />
+		<result property="code" column="code" />
+		<result property="interface_name" column="interface_name" />
+		<result property="method_name" column="method_name" />
+		<result property="service_version" column="service_version" />
+		<result property="service_group" column="service_group" />
+		<result property="param_type" column="param_type" />
+		<result property="params" column="params" />
+		<result property="status" column="status" />
+		<result property="exception" column="exception" />
+		<result property="exception_remark" column="exception_remark" />
+		<result property="start_time" column="start_time" />
+		<result property="end_time" column="end_time" />
+			</resultMap>
+
+	<select id="findDubboparamss" resultMap="Dubboparams" parameterType="com.ouyeel.provider.servicep.common.domain.Dubboparams">
+		select
+						  id as "id"
+						 ,   code as "code"
+						 ,   interface_name as "interface_name"
+						 ,   method_name as "method_name"
+						 ,   service_version as "service_version"
+						 ,   service_group as "service_group"
+						 ,   param_type as "param_type"
+						 ,   params as "params"
+						 ,   status as "status"
+						 ,   exception as "exception"
+						 ,   exception_remark as "exception_remark"
+						 ,   start_time as "start_time"
+						 ,   end_time as "end_time"
+						from dubboparams
+		<where>
+			<if test="id!=null">and  id=#{id}</if>
+			<if test="code!=null">and  code=#{code}</if>
+			<if test="interface_name!=null">and  interface_name=#{interface_name}</if>
+			<if test="method_name!=null">and  method_name=#{method_name}</if>
+			<if test="service_version!=null">and  service_version=#{service_version}</if>
+			<if test="service_group!=null">and  service_group=#{service_group}</if>
+			<if test="param_type!=null">and  param_type=#{param_type}</if>
+			<if test="params!=null">and  params=#{params}</if>
+			<if test="status!=null">and  status=#{status}</if>
+			<if test="exception!=null">and  exception=#{exception}</if>
+			<if test="exception_remark!=null">and  exception_remark=#{exception_remark}</if>
+			<if test="start_time!=null">and  start_time=#{start_time}</if>
+			<if test="end_time!=null">and  end_time=#{end_time}</if>
+					</where>
+	</select>
+
+	<select id="loadDubboparams" resultMap="Dubboparams" parameterType="com.ouyeel.provider.servicep.common.domain.Dubboparams">
+		select
+						  id as "id"
+						 ,   code as "code"
+						 ,   interface_name as "interface_name"
+						 ,   method_name as "method_name"
+						 ,   service_version as "service_version"
+						 ,   service_group as "service_group"
+						 ,   param_type as "param_type"
+						 ,   params as "params"
+						 ,   status as "status"
+						 ,   exception as "exception"
+						 ,   exception_remark as "exception_remark"
+						 ,   start_time as "start_time"
+						 ,   end_time as "end_time"
+						from dubboparams
+		<where>
+			<if test="id!=null">and  id=#{id}</if>
+			<if test="code!=null">and  code=#{code}</if>
+			<if test="interface_name!=null">and  interface_name=#{interface_name}</if>
+			<if test="method_name!=null">and  method_name=#{method_name}</if>
+			<if test="service_version!=null">and  service_version=#{service_version}</if>
+			<if test="service_group!=null">and  service_group=#{service_group}</if>
+			<if test="param_type!=null">and  param_type=#{param_type}</if>
+			<if test="params!=null">and  params=#{params}</if>
+			<if test="status!=null">and  status=#{status}</if>
+			<if test="exception!=null">and  exception=#{exception}</if>
+			<if test="exception_remark!=null">and  exception_remark=#{exception_remark}</if>
+			<if test="start_time!=null">and  start_time=#{start_time}</if>
+			<if test="end_time!=null">and  end_time=#{end_time}</if>
+					</where>
+	</select>
+
+	<select id="getDubboparams" resultMap="Dubboparams">
+		select
+						  id as "id"
+						 ,   code as "code"
+						 ,   interface_name as "interface_name"
+						 ,   method_name as "method_name"
+						 ,   service_version as "service_version"
+						 ,   service_group as "service_group"
+						 ,   param_type as "param_type"
+						 ,   params as "params"
+						 ,   status as "status"
+						 ,   exception as "exception"
+						 ,   exception_remark as "exception_remark"
+						 ,   start_time as "start_time"
+						 ,   end_time as "end_time"
+						from dubboparams
+		where
+		     					 id=#{id}
+																																																							</select>
+
+	<select id="countDubboparamss" resultType="int" parameterType="hashmap">
+		select
+		count(*) from dubboparams
+		 <where>
+			<if test="id!=null">and  id=#{id}</if>
+			<if test="code!=null">and  code=#{code}</if>
+			<if test="interface_name!=null">and  interface_name=#{interface_name}</if>
+			<if test="method_name!=null">and  method_name=#{method_name}</if>
+			<if test="service_version!=null">and  service_version=#{service_version}</if>
+			<if test="service_group!=null">and  service_group=#{service_group}</if>
+			<if test="param_type!=null">and  param_type=#{param_type}</if>
+			<if test="params!=null">and  params=#{params}</if>
+			<if test="status!=null">and  status=#{status}</if>
+			<if test="exception!=null">and  exception=#{exception}</if>
+			<if test="exception_remark!=null">and  exception_remark=#{exception_remark}</if>
+			<if test="start_time!=null">and  start_time=#{start_time}</if>
+			<if test="end_time!=null">and  end_time=#{end_time}</if>
+					</where>
+	</select>
+
+	<update id="modifyDubboparams" parameterType="com.ouyeel.provider.servicep.common.domain.Dubboparams">
+		update dubboparams
+		set
+						code = #{code}
+					 , 		interface_name = #{interface_name}
+					 , 		method_name = #{method_name}
+					 , 		service_version = #{service_version}
+					 , 		service_group = #{service_group}
+					 , 		param_type = #{param_type}
+					 , 		params = #{params}
+					 , 		status = #{status}
+					 , 		exception = #{exception}
+					 , 		exception_remark = #{exception_remark}
+					 , 		start_time = #{start_time}
+					 , 		end_time = #{end_time}
+					where
+					 id=#{id}
+																</update>
+
+	<insert id="addDubboparams" parameterType="com.ouyeel.provider.servicep.common.domain.Dubboparams">
+		insert  into dubboparams (				id
+						,code
+						,interface_name
+						,method_name
+						,service_version
+						,service_group
+						,param_type
+						,params
+						,status
+						,exception
+						,exception_remark
+						,start_time
+						,end_time
+						)
+		values(		#{id}
+						,#{code}
+						,#{interface_name}
+						,#{method_name}
+						,#{service_version}
+						,#{service_group}
+						,#{param_type}
+						,#{params}
+						,#{status}
+						,#{exception}
+						,#{exception_remark}
+						,#{start_time}
+						,#{end_time}
+				)
+	</insert>
+
+	<delete id="removeDubboparams" parameterType="com.ouyeel.provider.servicep.common.domain.Dubboparams">
+	delete from dubboparams
+	<where>		<if test="id!=null"> and id=#{id} </if>
+			<if test="code!=null"> and code=#{code} </if>
+			<if test="interface_name!=null"> and interface_name=#{interface_name} </if>
+			<if test="method_name!=null"> and method_name=#{method_name} </if>
+			<if test="service_version!=null"> and service_version=#{service_version} </if>
+			<if test="service_group!=null"> and service_group=#{service_group} </if>
+			<if test="param_type!=null"> and param_type=#{param_type} </if>
+			<if test="params!=null"> and params=#{params} </if>
+			<if test="status!=null"> and status=#{status} </if>
+			<if test="exception!=null"> and exception=#{exception} </if>
+			<if test="exception_remark!=null"> and exception_remark=#{exception_remark} </if>
+			<if test="start_time!=null"> and start_time=#{start_time} </if>
+			<if test="end_time!=null"> and end_time=#{end_time} </if>
+		</where>
+	</delete>
+
+	<delete id="removeDubboparamsByKey">
+	delete from dubboparams
+	where
+					 id=#{id}
+																</delete>
+
+</mapper>
