@@ -18,9 +18,15 @@
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>service-p</module>
         <module>provider-api</module>
+        <module>service-p</module>
         <module>service-c</module>
     </modules>
 
+
+    <build>
+    	<plugins>
+
+        </plugins>
+	</build>
 </project>
