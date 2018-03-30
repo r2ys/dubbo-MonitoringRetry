@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <meta charset="utf-8" />
+    <!--<meta name="_csrf_parameterName" th:content="${_csrf.parameterName}" />-->
+    <!--<meta name="_csrf_header" th:content="${_csrf.headerName}" />-->
+    <!--<meta name="_csrf_token" th:content="${_csrf.token}" />-->
+    <meta name="description" content="任务执行配置" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0" />
+    <title>任务执行配置</title>
+    <!-- OneUI通用的样式表 -->
+    <link rel="shortcut icon" th:href="@{/static/oneui/assets/img/favicons/favicon.png}"/>
+    <link rel="stylesheet" th:href="@{/static/oneui/assets/js/plugins/slick/slick.min.css}" />
+    <link rel="stylesheet" th:href="@{/static/oneui/assets/js/plugins/slick/slick-theme.min.css}" />
+
+    <!-- Bootstrap and OneUI CSS framework -->
+    <link rel="stylesheet" th:href="@{/static/oneui/assets/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" id="css-main" th:href="@{/static/oneui/assets/css/oneui.css}"/>
+    <!-- Kendo UI -->
+    <link rel="stylesheet" th:href="@{/static/kendoui/styles/kendo.common.min.css}"/>
+    <link rel="stylesheet" th:href="@{/static/kendoui/styles/kendo.rtl.min.css}"/>
+    <!-- <link href="@{/css/kendo.metro.css}" rel="stylesheet" /> -->
+    <link rel="stylesheet" th:href="@{/static/kendoui/styles/kendo.mobile.all.min.css}"/>
+    <!-- <link rel="stylesheet" th:href="@{/css/normal/common.css}"  /> -->
+    <link rel="stylesheet" th:href="@{/static/oneui/assets/js/plugins/highlightjs/github-gist.min.css}"/>
+
+    <!--自定义的统一样式-->
+    <link th:href="@{/static/kendo/css/kendo.metro.css}" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/static/kendo/css/common.css}"  />
+    <!-- 子布局的styles -->
+    <style type="text/css">
+        .page-content {
+            padding:20px;
+        }
+    </style>
+</head>
+
+<body style="font-family: '微软雅黑'!important;">
+
+
+
+        <!-- <sitemesh:write property="page.page-content" /> -->
+        <div class="page-content">
+
+            <div class="block block-bordered">
+                <div class="block-header bg-gray-lighter">
+                    数据区
+                    <ul class="block-options">
+                        <li>
+                            <button type="button" data-toggle="block-option"
+                                    data-action="content_toggle">
+                                <i class="si si-arrow-up"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="block-content">
+                    <div id="example">
+                        <div id="grid"></div>
+                        <span id="popupNotification"></span>
+                    </div>
+                </div>
+                <input id="id" name="id" type="text" th:value="${id}" style="display:none"/>
+                <input id="totalSize" name="totalSize" type="text" th:value="${totalSize}" style="display: none" />
+
+            </div>
+
+        </div>
+
+
+<!-- OneUI通用的js -->
+<!-- <%@ include file="/WEB-INF/fragments/kendo-test-js.jspf"%> -->
+<script th:src="@{/static/kendoui/js/jquery.min.js}"></script>
+<script th:src="@{/static/kendoui/js/kendo.all.min.js}"></script>
+<script th:src="@{/static/kendoui/js/messages/kendo.messages.zh-CN.min.js}"></script>
+<script th:src="@{/static/kendoui/js/cultures/kendo.culture.zh-CN.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/common.js}"></script>
+
+<script th:src="@{/static/oneui/assets/js/core/bootstrap.min.js}"></script>
+<script th:src="@{/static/oneui/assets/js/core/jquery.slimscroll.min.js}"></script>
+<script th:src="@{/static/oneui/assets/js/core/jquery.scrollLock.min.js}"></script>
+<script th:src="@{/static/oneui/assets/js/core/jquery.appear.min.js}"></script>
+<script th:src="@{/static/oneui/assets/js/core/jquery.countTo.min.js}"></script>
+<script th:src="@{/static/oneui/assets/js/core/jquery.placeholder.min.js}"></script>
+<script th:src="@{/static/oneui/assets/js/core/js.cookie.min.js}"></script>
+<script th:src="@{/static/oneui/assets/js/app.js}"></script>
+
+<script th:src="@{/static/oneui/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js}"></script>
+<script th:src="@{/static/oneui/assets/js/pages/base_ui_activity.js}"></script>
+
+<script th:src="@{/static/js/custom/init.js}"></script>
+<script th:src="@{/static/js/custom/tabstripstatic.js}"></script>
+<script th:src="@{/static/js/custom/kendoInline.js}"></script>
+<script th:src="@{/static/js/custom/jszip.min.js}"></script>
+
+<script th:src="@{/static/js/bootbox.min.js}"></script>
+<!-- KendoUI-csrf -->
+<script th:src="@{/static/js/kendoUi-csrf.js}"></script>
+<!-- 子布局中使用的Plugins -->
+
+<!-- 页面上的JS Code -->
+<!-- <sitemesh:write property="page.page-js" /> -->
+<script type="text/javascript">
+    /*<![CDATA[*/
+
+    var popupNotification = $("#popupNotification").kendoNotification().data("kendoNotification");
+    popupNotification.setOptions({
+        position: {
+            top: 100,
+            left: 680
+        }
+    });
+
+    jQuery(function($) {
+        /*var Queuedata = [
+            { text: "javaQueue", value: "javaQueue" }
+        ];*/
+
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    type: "POST",
+                    url: "job/queryjob",
+                    dataType: "json",
+                    contentType: "application/json"
+                },
+                create:{
+                    url: "job/addjob",
+                    dataType: "json",
+                    contentType: 'application/json',
+                    type: "POST"
+                },
+                destroy:{
+                    url: "job/deletejob",
+                    dataType: "json",
+                    contentType: 'application/json',
+                    type: "POST"
+                },
+                update:{
+                    url: "job/modifyjob",
+                    dataType: "json",
+                    contentType: 'application/json',
+                    type: "POST"
+                },
+                parameterMap: function (options, operation) {
+                    console.info(operation);
+                    console.info(options.page);
+                    if (operation !== "read") {
+                        return kendo.stringify(options.models[0]);
+                    } else {
+                        return JSON.stringify({page:options.page,page_size:options.pageSize});
+                    }
+                }
+            },
+            batch: true,
+            pageSize: 15,
+            //serverFiltering: false,
+            serverPaging: true,
+            //serverSorting: false,
+            requestEnd: function(e) {
+                if(e.type !=='read'){dataSource.read();}
+//                var response = e.response;
+//                if(response){
+//                    var type = e.type;
+//                    if(type !=='read'){
+//                        var status = response.status;
+//                        if(status == 200){
+////                            popupNotification.show(response.message, "info");
+//                            dataSource.read();
+//                        } else {
+////                            popupNotification.show(response.message, "info");
+//                            dataSource.read();
+//                        }
+//                        //window.location.reload();
+//                    }
+//                }
+            },
+            schema: {
+                data: "data",
+                total: "total",
+                model: {
+                    id: "job_NAME",
+                    fields: {
+                        job_GROUP: {
+                            type: "string",
+                            validation: {
+                                job_GROUPvalidation:function(input){
+                                    if(input.is("[name='job_GROUP']")){
+                                        if(input.val().trim()== ""){
+                                            input.attr("data-job_GROUPvalidation-msg", "任务组不能为空！");
+                                            return false;
+                                        }
+                                    }
+                                    return true;
+                                }
+                            }
+                        },
+                        job_CLASS_NAME: {
+                            type: "string",
+                            validation: {
+                                job_CLASS_NAMEvalidation:function(input){
+                                    if(input.is("[name='job_CLASS_NAME']")){
+                                        if(input.val().trim()== ""){
+                                            input.attr("data-job_CLASS_NAMEvalidation-msg", "任务类名不能为空！");
+                                            return false;
+                                        }
+                                    }
+                                    return true;
+                                }
+                            }
+                        },
+                        trigger_NAME: {
+                            type: "string",
+                            validation: {
+                                trigger_NAMEvalidation:function(input){
+                                    if(input.is("[name='trigger_NAME']")){
+                                        if(input.val().trim()== ""){
+                                            input.attr("data-trigger_NAMEvalidation-msg", "触发器不能为空！");
+                                            return false;
+                                        }
+                                    }
+                                    return true;
+                                }
+                            }
+                        },
+                        trigger_GROUP: {
+                            type: "string",
+                            validation: {
+                                trigger_GROUPvalidation:function(input){
+                                    if(input.is("[name='trigger_GROUP']")){
+                                        if(input.val().trim()== ""){
+                                            input.attr("data-trigger_GROUPvalidation-msg", "触发器分组不能为空！");
+                                            return false;
+                                        }
+                                    }
+                                    return true;
+                                }
+                            }
+                        },
+                        trigger_STATE: {
+                            type: "string",
+                            //defaultValue: "javaQueue",   //字段默认值的写法
+                            editable:false
+                        },
+                        CRON_EXPRESSION: {
+                            editable:true
+                        }
+                    }
+                }
+
+            }
+        });
+        $('#grid').kendoGrid({
+            dataSource: dataSource,
+            pageable: {
+                refresh: true,
+                pageSizes: [10,15,20],
+                buttonCount: 15
+            },
+            height: 550,
+            sortable: true,
+            filterable: false,
+            selectable: true,
+            resizable:true,
+            /* editable: 'inline', */
+            editable :
+            {
+//                confirmation : "您确定要删除吗？",
+                //createAt : "top",// 添加位置，默认是top：从第一行进行添加
+                //destroy : true,
+                mode : "inline" //弹出窗口的编辑模式（行内编辑：”inline”）
+            },
+            toolbar: [
+                {name:"create",text:"新增"}
+            ],
+            columns: [
+                {
+                    command: ["edit", "destroy" ,
+                    {id:"pausejob",text:"暂停", iconClass:"fa fa-pause-circle-o", click:function (e) {
+                        var pausejob=e.currentTarget;
+                        var tr=$(pausejob).parents("tr");
+                        var tds = $(tr).children('td');
+                        console.info(JSON.stringify(tds.eq(1).text()));
+                        var job_NAME = tds.eq(2).text();
+                        var job_GROUP = tds.eq(3).text();
+                        var param = JSON.stringify({jobName:job_NAME,jobGroupName:job_GROUP});
+                        $.ajax({
+                            url:getContextPath()+"/job/pausejob?jobName="+job_NAME+"&jobGroupName="+job_GROUP,
+                            type:"GET",
+                            contentType: 'application/json',
+//                            beforeSend:beforeSend,
+                            success:function(data){
+                                //成功以后刷新数据
+                                dataSource.read();
+                                alert(job_NAME+" 任务暂停成功");
+                            }
+                        });
+
+                    } } ,
+                    {id:"resumejob",text:"恢复", iconClass:"fa fa-play-circle-o", click:function (e) {
+                        var pausejob=e.currentTarget;
+                        var tr=$(pausejob).parents("tr");
+                        var tds = $(tr).children('td');
+                        console.info(JSON.stringify(tds.eq(1).text()));
+                        var job_NAME = tds.eq(2).text();
+                        var job_GROUP = tds.eq(3).text();
+                        $.ajax({
+                            url:getContextPath()+"/job/resumejob?jobName="+job_NAME+"&jobGroupName="+job_GROUP,
+                            type:"GET",
+                            contentType: 'application/json',
+//                            beforeSend:beforeSend,
+                            success:function(data){
+                                //成功以后刷新数据
+                                dataSource.read();
+                                alert(job_NAME+" 任务开始");
+                            }
+                        });
+                    }}], title:"操作", width: "100px"
+                },
+                {
+                    field: "sched_NAME",
+                    title: "任务实例",
+                    width: 100,
+                    attributes:{
+                        "class":"scriptCode"
+                    },
+                    editor: function (container, options) {
+                        // 定制需求: 新增时填写, 编辑时无法修改
+                        container.removeClass("k-edit-cell");
+                        container.html(options.model[options.field]);
+                    }
+                },{
+                    field: "job_NAME",
+                    title: "任务名称",
+                    width: 100,
+                    editor: function (container, options) {
+                        // 定制需求: 新增时填写, 编辑时无法修改
+                        if (options.model.isNew()) {
+                            var input = $("<input/>");
+                            input.attr("class", "k-input k-textbox");
+                            input.attr("name", options.field);
+                            input.appendTo(container);
+                        } else {
+                            container.removeClass("k-edit-cell");
+                            container.html(options.model[options.field]);
+                        }
+
+                    },
+                    attributes:{
+                        "class":"scriptCode"
+                    }
+                },
+                {
+                    field: "job_GROUP",
+                    title:"任务分组",
+                    width: 90,
+                    editor: function (container, options) {
+                        // 定制需求: 新增时填写, 编辑时无法修改
+                        if (options.model.isNew()) {
+                            var input = $("<input/>");
+                            input.attr("class", "k-input k-textbox");
+                            input.attr("name", options.field);
+                            input.appendTo(container);
+                        } else {
+                            container.removeClass("k-edit-cell");
+                            container.html(options.model[options.field]);
+                        }
+
+                    },
+                    attributes:{
+                        "class":"scriptCode"
+                    }
+
+                },
+                {
+                    field: "job_CLASS_NAME",
+                    title: "任务类名",
+                    width: 200,
+                    editor: function (container, options) {
+                        // 定制需求: 新增时填写, 编辑时无法修改
+                        if (options.model.isNew()) {
+                            var input = $("<input/>");
+                            input.attr("class", "k-input k-textbox");
+                            input.attr("name", options.field);
+                            input.appendTo(container);
+                        } else {
+                            container.removeClass("k-edit-cell");
+                            container.html(options.model[options.field]);
+                        }
+
+                    },
+                    attributes:{
+                        "class":"scriptCode"
+                    }
+                },{
+                    field: "trigger_NAME",
+                    title: "触发器名字",
+                    width: 80,
+                    editor: function (container, options) {
+                        // 定制需求: 新增时填写, 编辑时无法修改
+                        if (options.model.isNew()) {
+                            var input = $("<input/>");
+                            input.attr("class", "k-input k-textbox");
+                            input.attr("name", options.field);
+                            input.appendTo(container);
+                        } else {
+                            container.removeClass("k-edit-cell");
+                            container.html(options.model[options.field]);
+                        }
+
+                    },
+                    attributes:{
+                        "class":"scriptCode"
+                    }
+                },{
+                    field: "trigger_GROUP",
+                    title: "触发器分组",
+                    width: 80,
+                    editor: function (container, options) {
+                        // 定制需求: 新增时填写, 编辑时无法修改
+                        if (options.model.isNew()) {
+                            var input = $("<input/>");
+                            input.attr("class", "k-input k-textbox");
+                            input.attr("name", options.field);
+                            input.appendTo(container);
+                        } else {
+                            container.removeClass("k-edit-cell");
+                            container.html(options.model[options.field]);
+                        }
+
+                    },
+                    attributes:{
+                        "class":"scriptCode"
+                    }
+                },{
+                    field: "cron_EXPRESSION",
+                    title: "cron表达式",
+                    width: 80
+                },{
+                    field: "trigger_STATE",
+                    title: "触发器状态",
+                    width: 80,
+                    editor: function (container, options) {
+                        // 定制需求: 新增时填写, 编辑时无法修改
+                        container.removeClass("k-edit-cell");
+                        container.html(options.model[options.field]);
+                    },
+                    attributes:{
+                        "class":"scriptCode"
+                    }
+                }
+
+            ]
+        });
+
+    });
+
+    /*]]>*/
+</script>
+<!--引入loginout的JS-->
+</body>
+</html>
