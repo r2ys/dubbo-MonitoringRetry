@@ -148,6 +148,7 @@ $(document).ready(function() {
             // pageSize:10
         },
         selectable:"multiple row", //选中行时出现颜色，允许选中多行
+        detailInit: detailInit,
         toolbar: [
             {id:"update",text:"修改"}
         ],
@@ -207,11 +208,11 @@ $(document).ready(function() {
                 },
                 height: 20
             },
-            {
-                field: "exception",
-                title: "异常信息",
-                width: "60px"
-            },
+            // {
+            //     field: "exception",
+            //     title: "异常信息",
+            //     width: "60px"
+            // },
             {
                 field: "exception_remark",
                 title: "异常中文",
@@ -419,4 +420,33 @@ function deleteData(){
             alert("删除失败："+thrownError);
         }
     })
+}
+
+function detailInit(e) {
+    $("<div/>").appendTo(e.detailCell).kendoGrid({
+        dataSource: {
+            transport: {
+                read:{
+                    url:"queryE",
+                    contentType:"application/json",
+                    dataType:"json",
+                    type:"POST"
+                },
+                parameterMap: function(options,optionions) {
+                    if(optionions=="read"){
+                        var parameter = {
+                            code:e.data.code
+                        }
+                        return JSON.stringify(parameter);
+                    }
+                }
+            },
+            pageSize: 1,
+        },
+        scrollable: true,
+        height: 150,
+        columns: [
+            { field: "exception", title: "详细异常信息"}
+        ]
+    });
 }

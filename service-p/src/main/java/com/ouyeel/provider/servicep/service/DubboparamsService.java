@@ -28,6 +28,9 @@ public class DubboparamsService {
     public List<Dubboparams> loadDubboparams(Dubboparams entity){
     	return _DubboparamsMapper.loadDubboparams(entity);
     }
+    public List<Dubboparams> loadDubboparamsE(Dubboparams entity){
+    	return _DubboparamsMapper.loadDubboparamsE(entity);
+    }
 
 
     public int countDubboparamss(Dubboparams entity){

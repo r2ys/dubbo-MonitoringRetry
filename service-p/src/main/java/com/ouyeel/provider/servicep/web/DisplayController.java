@@ -52,4 +52,12 @@ public class DisplayController {
         return dubboparamsList;
     }
 
+    @RequestMapping(value = "/queryE",method = RequestMethod.POST)
+    @ResponseBody
+    public List<Dubboparams> queryException(@RequestBody Dubboparams dubboparams){
+        logger.info("---开始查询数据---");
+        List<Dubboparams> dubboparamsList = dubboparamsService.loadDubboparamsE(dubboparams);
+        return dubboparamsList;
+    }
+
 }

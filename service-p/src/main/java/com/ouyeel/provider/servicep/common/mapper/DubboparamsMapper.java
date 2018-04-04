@@ -15,6 +15,7 @@ public interface DubboparamsMapper {
     //List<Dubboparams> findDubboparamss(Dubboparams entity,RowBounds rowBounds);
 
     List<Dubboparams> loadDubboparams(Dubboparams entity);
+    List<Dubboparams> loadDubboparamsE(Dubboparams entity);
 
     int countDubboparamss(Dubboparams entity);
 

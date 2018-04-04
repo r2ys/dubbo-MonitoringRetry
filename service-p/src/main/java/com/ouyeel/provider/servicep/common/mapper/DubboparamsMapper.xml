@@ -30,7 +30,6 @@
 						 ,   param_type as "param_type"
 						 ,   params as "params"
 						 ,   status as "status"
-						 ,   exception as "exception"
 						 ,   exception_remark as "exception_remark"
 						 ,   start_time as "start_time"
 						 ,   end_time as "end_time"
