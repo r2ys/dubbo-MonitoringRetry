@@ -25,14 +25,6 @@ public class IndexController {
 	@Autowired
 	private DubboparamsService dubboparamsService;
 
-	@RequestMapping("/invoke")
-	@ResponseBody
-	public Object getResult(Integer id) throws IOException {
-		Dubboparams dubboparams = new Dubboparams();
-		dubboparams.setId(id);
-		List<Dubboparams> dubboparams1 = dubboparamsService.loadDubboparams(dubboparams);
-		assert dubboparams1 != null;
-		return dubboInvokeService.dubbo$Invoke(dubboparams1.get(0));
-	}
+
 
 }

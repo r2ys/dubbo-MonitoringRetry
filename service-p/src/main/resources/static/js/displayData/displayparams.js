@@ -201,7 +201,7 @@ $(document).ready(function() {
                 title: "调用状态",
                 width: "60px",
                 template: function (dataItem) {
-                    if (dataItem.status)
+                    if (dataItem.status=="1")
                         return "成功";
                     else
                         return "失败";
@@ -231,12 +231,27 @@ $(document).ready(function() {
             {
                 title: "操作",
                 width: 100,
-                template: function (dataItem) {
-                    if (!dataItem.status)
-                        return '<a href="toDeployDetail?id=' + dataItem.id + '">重发</a>';
-                    else
-                        return "";
-                }
+                command: [
+                    {id:"retry",text:"重试", iconClass:"fa fa-refresh", click:function (e) {
+                        var retry=e.currentTarget;
+                        var tr=$(retry).parents("tr");
+                        var tds = $(tr).children('td');
+                        var code = tds.eq(3).text();
+                        var param = JSON.stringify({code:code});
+                        $.ajax({
+                            url:"invoke?code="+code,
+                            type:"GET",
+                            contentType: 'application/json',
+//                            beforeSend:beforeSend,
+                            success:function(data){
+                                //成功以后刷新数据
+                                dataSource.read();
+                                alert("执行成功");
+                            }
+                        });
+
+                    } } ]
+
             }
         ],
         editable:false    //行编辑模式是否开启,只有设定为true，同一行的默认操作按钮才会生效  设定为false也会禁用了行编辑
