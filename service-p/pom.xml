@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>service-p</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
 	<name>service-p</name>
 	<description>dubbo project for Spring Boot</description>
@@ -141,10 +141,10 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -181,7 +181,7 @@
                 <filtering>false</filtering>
             </resource>
             <resource>
-                <directory>src/main/resources/templates</directory>
+                <directory>src/main/resources/template</directory>
                 <filtering>false</filtering>
                 <includes>
                     <include>**/*.jsp</include>
@@ -195,6 +195,15 @@
                     <include>**/*.xml</include>
                 </includes>
             </resource>
+            <resource>
+                <directory>src/main/webapp</directory>
+                <filtering>true</filtering>
+                <targetPath>META-INF/resources/</targetPath>
+                <includes>
+                    <include>**/**</include>
+                </includes>
+            </resource>
+
         </resources>
     </build>
 
