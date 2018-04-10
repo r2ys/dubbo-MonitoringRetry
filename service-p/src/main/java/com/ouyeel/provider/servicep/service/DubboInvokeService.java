@@ -11,6 +11,7 @@ import com.ouyeel.provider.servicep.common.domain.Dubboparams;
 import com.ouyeel.provider.servicep.util.UUIDHexIdGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -27,6 +28,9 @@ import java.util.Map;
 @Slf4j
 @Service
 public class DubboInvokeService {
+
+	@Value("${zk.address.dubbop}")
+	private String zk;
 
 	@Autowired
 	private DubboparamsService dubboparamsService;
@@ -102,12 +106,12 @@ public class DubboInvokeService {
 		return objects;
 	}
 
-	private static ReferenceConfig<GenericService> referenceConfig(Dubboparams dubboparams){
+	private ReferenceConfig<GenericService> referenceConfig(Dubboparams dubboparams){
 		ApplicationConfig application = new ApplicationConfig();
         application.setName("service-p");
         // 连接注册中心配置
         RegistryConfig registry = new RegistryConfig();
-        registry.setAddress("zookeeper://127.0.0.1:2181");
+        registry.setAddress(zk);
         ReferenceConfig<GenericService> referenceConfig = new ReferenceConfig<GenericService>();
         referenceConfig.setApplication(application);
         referenceConfig.setRegistry(registry);
