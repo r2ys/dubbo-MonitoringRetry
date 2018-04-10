@@ -19,15 +19,15 @@
     <%--<base href=" <%=basePath%>">--%>
 
     <!-- Bootstrap and OneUI CSS framework -->
-    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" id="css-main" href="/static/assets/css/oneui.css">
+    <link rel="stylesheet" href="${ctx}/static/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" id="css-main" href="${ctx}/static/assets/css/oneui.css">
 
-    <link rel="stylesheet" href="/static/kendo/css/kendo.common.min.css" />
-    <link rel="stylesheet" href="/static/kendo/css/kendo.default.min.css" />
-    <link rel="stylesheet" href="/static/kendo/css/kendo.default.mobile.min.css" />
+    <link rel="stylesheet" href="${ctx}/static/kendo/css/kendo.common.min.css" />
+    <link rel="stylesheet" href="${ctx}/static/kendo/css/kendo.default.min.css" />
+    <link rel="stylesheet" href="${ctx}/static/kendo/css/kendo.default.mobile.min.css" />
 
-    <script src="/static/kendo/js/jquery.min.js"></script>
-    <script src="/static/kendo/js/kendo.all.min.js"></script>
+    <script src="${ctx}/static/kendo/js/jquery.min.js"></script>
+    <script src="${ctx}/static/kendo/js/kendo.all.min.js"></script>
 
     <style>
         .block-header{
@@ -188,18 +188,18 @@
 <!-- END Page Container -->
 
 <!-- OneUI Core JS: jQuery, Bootstrap, slimScroll, scrollLock, Appear, CountTo, Placeholder, Cookie and App.js -->
-<script src="/static/assets/js/core/bootstrap.min.js"></script>
-<script src="/static/assets/js/core/jquery.slimscroll.min.js"></script>
-<script src="/static/assets/js/core/jquery.scrollLock.min.js"></script>
-<script src="/static/assets/js/core/jquery.appear.min.js"></script>
-<script src="/static/assets/js/core/jquery.countTo.min.js"></script>
-<script src="/static/assets/js/core/jquery.placeholder.min.js"></script>
-<script src="/static/assets/js/core/js.cookie.min.js"></script>
-<script src="/static/assets/js/app.js"></script>
+<script src="${ctx}/static/assets/js/core/bootstrap.min.js"></script>
+<script src="${ctx}/static/assets/js/core/jquery.slimscroll.min.js"></script>
+<script src="${ctx}/static/assets/js/core/jquery.scrollLock.min.js"></script>
+<script src="${ctx}/static/assets/js/core/jquery.appear.min.js"></script>
+<script src="${ctx}/static/assets/js/core/jquery.countTo.min.js"></script>
+<script src="${ctx}/static/assets/js/core/jquery.placeholder.min.js"></script>
+<script src="${ctx}/static/assets/js/core/js.cookie.min.js"></script>
+<script src="${ctx}/static/assets/js/app.js"></script>
 
 <!-- Page JS Plugins -->
-<script src="/static/assets/js/plugins/chartjs/Chart.min.js"></script>
-<script src="/static/js/displayData/displayparams.js"></script>
+<script src="${ctx}/static/assets/js/plugins/chartjs/Chart.min.js"></script>
+<script src="${ctx}/static/js/displayData/displayparams.js"></script>
 <script>
     $(function(){
 
