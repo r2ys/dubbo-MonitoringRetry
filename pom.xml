@@ -24,6 +24,41 @@
     </modules>
 
 
+    <!-- api deploy目录，稳定版本-releases 快照版本-snapshots -->
+    <distributionManagement>
+        <repository>
+            <id>BaoCloud</id>
+            <name>宝之云的 Maven 库</name>
+            <url>http://maven.ouyeel.cn:8081/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>BaoCloud</id>
+            <name>宝之云的 Maven SNAPSHOT库</name>
+            <url>http://maven.ouyeel.cn:8081/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>private repository</id>
+            <url>http://10.70.95.15:9080/nexus/content/groups/public/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>BaoCloud</id>
+            <name>宝之云的 Maven 库</name>
+            <url>http://maven.ouyeel.cn:8081/nexus/content/groups/public/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <build>
     	<plugins>
 
