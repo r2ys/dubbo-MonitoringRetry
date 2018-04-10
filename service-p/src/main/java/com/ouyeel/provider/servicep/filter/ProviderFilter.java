@@ -10,7 +10,7 @@ import com.ouyeel.provider.servicep.util.DemoUtils;
  * Date 2018/3/19
  * Time 9:20
  */
-@Activate(Constants.PROVIDER)
+//@Activate(Constants.PROVIDER)
 public class ProviderFilter implements Filter{
 	@Override
 	public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {

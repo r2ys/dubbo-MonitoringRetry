@@ -26,7 +26,8 @@ public class MessageService {
 	@Autowired
 	private DubboparamsService dubboparamsService;
 
-	@RabbitListener(queues = {"hello1"})
+	@RabbitListener(queues = {"dubbo_service_p"})
+//	@RabbitListener(queues = {"hello1"})
 	public void getMessageFromMq(Message message){
 		String s = new String(message.getBody());
 		ObjectMapper objectMapper = new ObjectMapper();

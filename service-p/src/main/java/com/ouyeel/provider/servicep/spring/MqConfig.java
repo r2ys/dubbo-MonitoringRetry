@@ -43,4 +43,15 @@ public class MqConfig {
     public RabbitTemplate rabbitTemplate(){
     	return new RabbitTemplate(connectionFactory());
     }
+
+
+    @Value("${interface.monitoring}")
+	private String interfaceName;
+
+    @Bean(name = "interfaceName")
+	public InterfaceNameBean interfaceNameBean(){
+		InterfaceNameBean interfaceNameBean = new InterfaceNameBean();
+		interfaceNameBean.setInterfaceName(interfaceName);
+		return interfaceNameBean;
+	}
 }

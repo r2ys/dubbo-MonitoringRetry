@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 /**
  * Created by JieHuang
  */
-@Configuration
+@Configuration(value = "service_p_context")
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class SpringApplicationContext implements InitializingBean {
     public static Logger logger = LoggerFactory.getLogger(SpringApplicationContext.class);
