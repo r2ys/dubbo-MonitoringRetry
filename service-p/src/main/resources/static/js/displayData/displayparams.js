@@ -314,22 +314,31 @@ $(document).ready(function() {
 
     $("#code").kendoMaskedTextBox({
         change: function() {    //当内容发生变化时，所要执行的操作
-            code = this.value();
-            console.log(code); //value is the selected date in the maskedtextbox
+            if(this.value()){
+                code = this.value();
+            }else{
+                code = null;
+            }
         }
     });
 
     $("#interface_name").kendoMaskedTextBox({
         change:function(){
-            interface_name = this.value();
-            console.log(interface_name);
+            if(this.value()){
+                interface_name = this.value();
+            }else{
+                interface_name = null;
+            }
         }
     });
 
     $("#method_name").kendoMaskedTextBox({
         change:function(){
-            method_name = this.value();
-            console.log(method_name);
+            if(this.value()){
+                method_name = this.value();
+            }else {
+                method_name = null;
+            }
         }
     });
 
