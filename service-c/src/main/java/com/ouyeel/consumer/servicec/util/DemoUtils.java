@@ -84,6 +84,6 @@ public class DemoUtils {
 		}
 		MessageProperties messageProperties = new MessageProperties();
 		Message message = new Message(param.getBytes(),messageProperties);
-		bean.send("ex_log","qwer",message);
+		bean.send("cw.dubbo.consumer","consumer",message);
 	}
 }

@@ -28,6 +28,8 @@ public class DubboInvokeService {
 
 	@Value("${zk.address.dubbop}")
 	private String zk;
+	@Value("${dubbo.registry.protocol}")
+	private String protocol;
 
 	@Autowired
 	private DubboparamsService dubboparamsService;
@@ -109,6 +111,7 @@ public class DubboInvokeService {
         // 连接注册中心配置
         RegistryConfig registry = new RegistryConfig();
         registry.setAddress(zk);
+        registry.setProtocol(protocol);
         ReferenceConfig<GenericService> referenceConfig = new ReferenceConfig<GenericService>();
         referenceConfig.setApplication(application);
         referenceConfig.setRegistry(registry);

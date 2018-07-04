@@ -11,12 +11,12 @@
     <dubbo:application name="service-c"  />
 
     <!-- 使用multicast广播注册中心暴露发现服务地址 -->
-    <dubbo:registry address="zookeeper://127.0.0.1:2181" />
+    <dubbo:registry address="zookeeper://localhost:2181" />
 
     <!-- 生成远程服务代理，可以和本地bean一样使用demoService -->
     <dubbo:reference id="demoApi1" interface="com.ouyeel.provider.api.DemoApi1" version="0.5" group="service_p" timeout="50000"/>
 
-    <dubbo:provider filter="consumerFilter"/>
+    <dubbo:consumer filter="consumerFilter"/>
 
     <!--注解配置-->
     <dubbo:annotation package="com.ouyeel.consumer"/>

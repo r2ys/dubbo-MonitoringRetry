@@ -11,7 +11,7 @@
     <dubbo:application name="service-p"  />
 
     <!-- 使用multicast广播注册中心暴露服务地址 -->
-    <dubbo:registry address="zookeeper://127.0.0.1:2181" />
+    <dubbo:registry address="zookeeper://localhost:2181" />
 
     <!-- 用dubbo协议在20880端口暴露服务 -->
     <dubbo:protocol name="dubbo" port="20880" />
@@ -21,7 +21,7 @@
     <dubbo:service interface="com.ouyeel.provider.api.DemoApi1" ref="demoApi1Imp" group="service_p" version="0.5" timeout="50000"/>
 
     <!--注解配置-->
-    <dubbo:annotation package="com.ouyeel.provider"/>
+    <dubbo:annotation package="com.ouyeel.provider.servicep"/>
 
     <dubbo:provider filter="providerFilter"/>
 </beans>
