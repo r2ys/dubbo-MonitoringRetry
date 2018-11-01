@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--启动项设置为 trace，加载 springboot 启动内部各种详细输出-->
+<Configuration>
+    <Appenders>
+		<OplatDubboLog name="dubbo" fileName="${user.home}/logs/dubbo/dubbo.log" filePattern="${user.home}/logs/dubbo/dubbo_%d{yyyy-MM-dd}_%i.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+            <Policies>
+                <!--时间备份策略，interval中的值取决于filePatter中定义的时间格式，如果%d{yyyyy-MM-dd HH:mm:ss}则interval="120
+            "则是间隔120秒生成一个日志文件，如果时间格式为%d{yyyyy-MM-dd HH:mm}则interval="2"则是间隔2分钟后生成一个日志文件-->
+				<TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+				<!--文件大小备份策略,500M后生成新的日志文件-->
+				<SizeBasedTriggeringPolicy size="1024000 KB" />
+			</Policies>
+			<!--文件最多存在20个-->
+			<DefaultRolloverStrategy max="20" />
+        </OplatDubboLog>
+    </Appenders>
+    <Loggers>
+        <!--记录 com.oplatdubbo.filter 包及其子包 debug 及其以上的记录，并输出到文件中-->
+        <Logger name="com.oplatdubbo.filter" level="info" additivity="false">
+            <AppenderRef ref="dubbo" />
+        </Logger>
+        <!--根记录全部输出到控制台上-->
+        <Root level="warn">
+            <AppenderRef ref="console" />
+        </Root>
+    </Loggers>
+</Configuration>

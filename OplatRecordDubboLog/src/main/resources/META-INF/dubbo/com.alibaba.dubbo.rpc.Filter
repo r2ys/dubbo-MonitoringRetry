@@ -1,0 +1,2 @@
+oplatConsumerLogFilter=com.oplatdubbo.filter.OplatConsumerLogFilter
+oplatProviderLogFilter=com.oplatdubbo.filter.OplatProviderLogFilter
