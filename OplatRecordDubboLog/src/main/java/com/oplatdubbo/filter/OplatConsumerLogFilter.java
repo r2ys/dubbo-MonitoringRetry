@@ -30,7 +30,6 @@ public class OplatConsumerLogFilter implements Filter {
 			result = invoker.invoke(invocation);
 			log.info("the calling {} is from  {} to {}", interfaceName+"-"+methodName, localIp, host);
 			if (result.hasException()) {
-
 				Map<String, String> serviceInfos = invoker.getUrl().getParameters();
 				String params = LogUtils.dubboParam2Json(invocation);
 				log.error("consumer exp: host={}, interfaceName={}, methodName={}, serviceInfos={}, params={}",
@@ -40,7 +39,6 @@ public class OplatConsumerLogFilter implements Filter {
 		} catch (Exception e) {
 			log.error("{}",e);
 		}
-//		log.info("{} from {} response to {}", interfaceName+"-"+methodName, localIp, host);
 		return result;
 	}
 
