@@ -27,8 +27,8 @@ public class OplatConsumerLogFilter implements Filter {
 		String interfaceName = invoker.getInterface().getName();
 		String methodName = invocation.getMethodName();
 		try {
-			result = invoker.invoke(invocation);
 			log.info("the calling {} is from  {} to {}", interfaceName+"-"+methodName, localIp, host);
+			result = invoker.invoke(invocation);
 			if (result.hasException()) {
 				Map<String, String> serviceInfos = invoker.getUrl().getParameters();
 				String params = LogUtils.dubboParam2Json(invocation);
